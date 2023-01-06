@@ -36,51 +36,21 @@ refreshButton.addEventListener('click', () => {
     getRandomQuotes();
 });
 
-async function showCountry() {
-    const getCountry = await fetch(
-        'https://api.freegeoip.app/json/?apikey=badbfed0-840d-11ec-bccd-9fb72d031ad2'
-    );
+async function showCountry(){
+    const getCountry = await fetch('http://worldtimeapi.org/api/ip');
 
     const data = await getCountry.json();
 
-    country.textContent = `${data.city}, ${data.country_name}`;
+    console.log(data);
 
-    loc.textContent = `${data.time_zone}`;
+    country.textContent = data.timezone;
+
+    loc.textContent = data.timezone;
+
+    dayYear.textContent = data.day_of_year;
+    dayWeek.textContent = data.day_of_week;
+    weekNumber.textContent = data.week_number;
 }
-
-// async function getTime() {
-//     const location = document.getElementById('location');
-
-//     const responsive = await fetch('http://worldtimeapi.org/api/ip');
-//     const timeData = await responsive.json();
-
-//     const currentTime = timeData.datetime;
-
-//     time.innerHTML = `${currentTime.slice(
-//         11,
-//         16
-//     )} <span>${timeData.utc_offset.slice(0, 3)}</span>`;
-
-//     location.textContent = timeData.timezone;
-//     dayYear.textContent = timeData.day_of_year;
-//     dayWeek.textContent = timeData.day_of_week;
-//     weekNumber.textContent = timeData.week_number;
-
-//     if (time >= '5' && time <= '11') {
-//         main.style.backgroundImage = 'url(../assets/img/morning.jpg)';
-//         textDate.textContent = `Good Morning. It's currently`;
-//         icon.innerHTML = `<?xml version="1.0" ?><svg fill="none" height="24" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" x2="12" y1="2" y2="9"/><line x1="4.22" x2="5.64" y1="10.22" y2="11.64"/><line x1="1" x2="3" y1="18" y2="18"/><line x1="21" x2="23" y1="18" y2="18"/><line x1="18.36" x2="19.78" y1="11.64" y2="10.22"/><line x1="23" x2="1" y1="22" y2="22"/><polyline points="8 6 12 2 16 6"/></svg>`;
-//     } else if (time >= '12' && time <= '17') {
-//         main.style.backgroundImage = 'url(../assets/img/afternoon.jpg)';
-//         textDate.textContent = `Good Afternoon. It's currently`;
-//         icon.innerHTML = `<i class="fas fa-sun"></i>`;
-//     } else {
-//         main.style.backgroundImage = 'url(../assets/img/night.jpg)';
-//         textDate.textContent = `Good Evening. It's currently`;
-//         icon.innerHTML = `<i class="fas fa-moon"></i>`;
-//     }
-//     setInterval(getTime, 1000);
-// }
 
 function getTime() {
     const getDate = new Date();
@@ -110,65 +80,6 @@ function getTime() {
 }
 
 setInterval(getTime, 1000);
-
-// dateName();
-
-// function dateName(time) {
-//     let mainTime = new Date();
-
-//     // const newDate = mainTime.slice(16, 21);
-//     // const timeZone = mainTime.slice(28, 31);
-
-//     time.innerHTML = `${mainTime} <span>${mainTime}</span>`;
-
-//     // if (time <= 12) {
-//     //     return `Доброе утро ${name}`;
-//     // } else if (time <= 18) {
-//     //     return `Добрый день ${name}`;
-//     // } else if (time >= 18) {
-//     //     return `Добрый вечер ${name}`;
-//     // } else {
-//     //     return `Доброй ночи ${name}`;
-//     // }
-// }
-
-// function getTime() {
-//     const location = document.getElementById('location');
-
-//     axios
-//         .get('https://worldtimeapi.org/api/ip')
-//         .then((regionRes) => {
-//             const timeData = regionRes.data;
-//             const currentTime = timeData.datetime;
-
-//             time.innerHTML = `${currentTime.slice(
-//                 11,
-//                 16
-//             )} <span>${timeData.utc_offset.slice(0, 3)}</span>`;
-
-//             location.textContent = timeData.timezone;
-//             dayYear.textContent = timeData.day_of_year;
-//             dayWeek.textContent = timeData.day_of_week;
-//             weekNumber.textContent = timeData.week_number;
-
-//             if (time >= '5' && time <= '11') {
-//                 main.style.backgroundImage = 'url(../assets/img/morning.jpg)';
-//                 textDate.textContent = `Good Morning. It's currently`;
-//                 icon.innerHTML = `<?xml version="1.0" ?><svg fill="none" height="24" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" x2="12" y1="2" y2="9"/><line x1="4.22" x2="5.64" y1="10.22" y2="11.64"/><line x1="1" x2="3" y1="18" y2="18"/><line x1="21" x2="23" y1="18" y2="18"/><line x1="18.36" x2="19.78" y1="11.64" y2="10.22"/><line x1="23" x2="1" y1="22" y2="22"/><polyline points="8 6 12 2 16 6"/></svg>`;
-//             } else if (time >= '12' && time <= '17') {
-//                 main.style.backgroundImage = 'url(../assets/img/afternoon.jpg)';
-//                 textDate.textContent = `Good Afternoon. It's currently`;
-//                 icon.innerHTML = `<i class="fas fa-sun"></i>`;
-//             } else {
-//                 main.style.backgroundImage = 'url(../assets/img/night.jpg)';
-//                 textDate.textContent = `Good Evening. It's currently`;
-//                 icon.innerHTML = `<i class="fas fa-moon"></i>`;
-//             }
-//         })
-//         .catch((err) => console.error(err));
-
-//     setInterval(getTime, 1000);
-// }
 
 more.addEventListener('click', () => {
     timeMain.classList.toggle('active');
