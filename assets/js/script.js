@@ -37,7 +37,7 @@ refreshButton.addEventListener('click', () => {
 });
 
 async function showCountry(){
-    const getCountry = await fetch('http://worldtimeapi.org/api/ip');
+    const getCountry = await fetch('https://worldtimeapi.org/api/ip');
 
     const data = await getCountry.json();
 
